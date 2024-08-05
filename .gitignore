@@ -1,0 +1,62 @@
+###> symfony/framework-bundle ###
+/.env.local
+/.env.local.php
+/.env.*.local
+/config/secrets/prod/prod.decrypt.private.php
+.env
+/public/bundles/
+src/app/var/
+src/app/vendor/
+vendor
+###< symfony/framework-bundle ###
+
+###> symfony/phpunit-bridge ###
+.phpunit.result.cache
+/phpunit.xml
+###< symfony/phpunit-bridge ###
+
+###> phpunit/phpunit ###
+/phpunit.xml
+.phpunit.result.cache
+###< phpunit/phpunit ###
+
+# Composer
+/composer.phar
+
+# Node modules
+/node_modules/
+
+# Build artifacts
+/public/build/
+
+# IDE and editor files
+/.idea/
+/.vscode/
+*.swp
+*.swo
+*~
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Logs
+*.log
+
+# Cache
+/.cache
+
+# User-specific files
+/.php-cs-fixer.cache
+/.php_cs.cache
+
+# Symfony Flex
+/.symfony.local.yaml
+
+# PHPStan
+phpstan.neon
