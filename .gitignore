@@ -9,7 +9,7 @@ src/app/var/
 src/app/vendor/
 vendor
 ###< symfony/framework-bundle ###
-
+.github
 ###> symfony/phpunit-bridge ###
 .phpunit.result.cache
 /phpunit.xml
