@@ -3,40 +3,32 @@
 namespace App\Controller;
 
 use App\Model\Starship;
+use App\Repository\StarshipRepository;
+use JetBrains\PhpStorm\NoReturn;
 use Psr\Log\LoggerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
+#[Route('/api/starships')]
 class StarshipApiController extends AbstractController
 {
-    #[Route('/api/starship', name: 'app_api_starship')]
-   public function getCollection(LoggerInterface $logger) :Response
+    #[Route('', name: 'app_api_starships', methods: ['GET'])]
+    public function getCollection(StarshipRepository $starshipRepository): Response
     {
-        $logger->info('Starship collection retrieved');
-        $starships = [
-            new Starship(
-                1,
-                'USS LeafyCruiser (NCC-0001)',
-                'Garden',
-                'Jean-Luc Pickles',
-                'taken over by Q'
-            ),
-            new Starship(
-                2,
-                'USS Espresso (NCC-1234-C)',
-                'Latte',
-                'James T. Quick!',
-                'repaired',
-            ),
-            new Starship(
-                3,
-                'USS Wanderlust (NCC-2024-W)',
-                'Delta Tourist',
-                'Kathryn Journeyway',
-                'under construction',
-            ),
-        ];
+        $starships = $starshipRepository->findAll();
         return $this->json($starships);
+    }
+
+    #[Route('/{id<\d+>}', methods: ['GET'])]
+    public function get(int $id, StarshipRepository $starshipRepository): Response
+    {
+        $starship = $starshipRepository->find($id);
+
+        if (!$starship) {
+            throw $this->createNotFoundException('Starship not found');
+        }
+
+        return $this->json($starship);
     }
 }

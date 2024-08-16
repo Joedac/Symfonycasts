@@ -13,20 +13,17 @@ services:
         ports:
             - '8080:80'
 
-    db:
-        image: mariadb:10.6.4-focal
-        volumes:
-            - type: volume
-              source: dbdata
-              target: /var/lib/mysql
+    database:
+        image: postgres:13-alpine
         environment:
-            TZ: 'Europe/Rome'
-            MYSQL_ALLOW_EMPTY_PASSWORD: 'no'
-            MYSQL_ROOT_PASSWORD: '${MYSQL_ROOT_PASSWORD}'
-            MYSQL_USER: '${MYSQL_USER}'
-            MYSQL_PASSWORD: '${MYSQL_PASSWORD}'
-            MYSQL_DATABASE: '${MYSQL_DATABASE}'
+            POSTGRES_DB: app
+            POSTGRES_PASSWORD: ChangeMe
+            POSTGRES_USER: symfony
+        volumes:
+            - db-data:/var/lib/postgresql/data:rw
+        ports:
+            - "5432"
 
 volumes:
-    dbdata:
-    
+    db-data:
+

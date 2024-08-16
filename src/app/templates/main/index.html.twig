@@ -1,19 +1,47 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{{ parent() }}{% endblock %}
+{% block title %}Starshop: Beam up some parts!{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
-
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
-
-    This horrible message is coming from:
     <h1>
         Starshop: your monopoly-busting option for Starship parts!
     </h1>
-</div>
+
+    <div>
+        Browse through {{ ships|length * 10 }} starships!
+
+        {% if ships|length > 2 %}
+            <p>
+                {# Do you think "shiploads" will pass the legal team? #}
+                That's a shiploads of ships!
+            </p>
+        {% endif %}
+    </div>
+
+    <div>
+        <h2>My Ship</h2>
+
+        <table>
+            <tr>
+                <th>Name</th>
+                <td>
+                    <a href="{{ path('app_starship_show', {
+                        id: myShip.id
+                    }) }}">{{ myShip.name }}</a>
+                </td>
+            </tr>
+            <tr>
+                <th>Class</th>
+                <td>{{ myShip.class }}</td>
+            </tr>
+            <tr>
+                <th>Captain</th>
+                <td>{{ myShip.captain|upper|lower|title }}</td>
+            </tr>
+            <tr>
+                <th>Status</th>
+                <td>{{ myShip.status }}</td>
+            </tr>
+        </table>
+    </div>
 {% endblock %}
