@@ -3,7 +3,7 @@ ARG SYMFONY_PARAMS="--version=7.0.* --webapp"
 FROM php:8.2-apache
 
 # Install required dependencies and PHP extensions
-RUN apt update && apt install -y \
+RUN apt-get update && apt-get install -y \
     libicu-dev \
     libonig-dev \
     libzip-dev \
@@ -12,12 +12,9 @@ RUN apt update && apt install -y \
     curl \
     git \
     libpq-dev \
-    && git config --global user.email "you@example.com" && git config --global user.name "Your Name" \
     && docker-php-ext-configure intl \
-    && docker-php-ext-install intl \
-    && docker-php-ext-install mbstring \
-    && docker-php-ext-install zip \
-    && docker-php-ext-install pdo_pgsql \
+    && docker-php-ext-install intl mbstring zip pdo pdo_mysql pdo_pgsql \
+    && docker-php-ext-enable intl mbstring zip pdo pdo_mysql pdo_pgsql \
     && a2enmod rewrite
 
 # Enable PHP extensions

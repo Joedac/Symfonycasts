@@ -12,18 +12,33 @@ services:
               target: /usr/src
         ports:
             - '8080:80'
+        depends_on:
+            -   db
 
-    database:
-        image: postgres:13-alpine
-        environment:
-            POSTGRES_DB: app
-            POSTGRES_PASSWORD: ChangeMe
-            POSTGRES_USER: symfony
+    tailwind-worker:
+        build:
+            context: .
+        command: [ 'symfony', 'console', 'tailwind:build', '--watch' ]
         volumes:
-            - db-data:/var/lib/postgresql/data:rw
-        ports:
-            - "5432"
+            - type: bind
+              source: ./src
+              target: /usr/src
+        depends_on:
+            - php-apache
+    db:
+        image: mariadb:10.6.4-focal
+        volumes:
+            - type: volume
+              source: dbdata
+              target: /var/lib/mysql
+        environment:
+            TZ: 'Europe/Rome'
+            MYSQL_ALLOW_EMPTY_PASSWORD: 'no'
+            MYSQL_ROOT_PASSWORD: '${MYSQL_ROOT_PASSWORD}'
+            MYSQL_USER: '${MYSQL_USER}'
+            MYSQL_PASSWORD: '${MYSQL_PASSWORD}'
+            MYSQL_DATABASE: '${MYSQL_DATABASE}'
 
 volumes:
-    db-data:
+    dbdata:
 
