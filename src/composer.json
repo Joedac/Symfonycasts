@@ -1,0 +1,8 @@
+{
+    "require": {
+        "symfony/ux-turbo": "^2.20"
+    },
+    "require-dev": {
+        "symfony/maker-bundle": "^1.61"
+    }
+}
