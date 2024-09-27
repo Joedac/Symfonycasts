@@ -10,6 +10,7 @@ readonly class Starship
         private string $class,
         private string $captain,
         private StarshipStatusEnum $status,
+        private \DateTimeImmutable $arrivedAt,
     ) {
     }
     public function getId(): int
@@ -45,5 +46,10 @@ readonly class Starship
             StarshipStatusEnum::IN_PROGRESS => 'images/catship.webp',
             StarshipStatusEnum::COMPLETED => 'images/catship.webp',
         };
+    }
+
+    public function getArrivedAt(): \DateTimeImmutable
+    {
+        return $this->arrivedAt;
     }
 }

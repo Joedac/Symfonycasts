@@ -20,21 +20,24 @@ class StarshipRepository
                 'USS LeafyCruiser (NCC-0001)',
                 'Garden',
                 'Jean-Luc Pickles',
-                StarshipStatusEnum::IN_PROGRESS
+                StarshipStatusEnum::IN_PROGRESS,
+                \DateTimeImmutable::createFromFormat('Y-m-d H:i:s', '2020-01-01 00:00:00'),
             ),
             new Starship(
                 2,
                 'USS Espresso (NCC-1234-C)',
                 'Latte',
                 'James T. Quick!',
-                StarshipStatusEnum::COMPLETED
+                StarshipStatusEnum::COMPLETED,
+                \DateTimeImmutable::createFromFormat('Y-m-d H:i:s', '2020-01-01 00:00:00'),
             ),
             new Starship(
                 3,
                 'USS Wanderlust (NCC-2024-W)',
                 'Delta Tourist',
                 'Kathryn Journeyway',
-                StarshipStatusEnum::WAITING
+                StarshipStatusEnum::WAITING,
+                \DateTimeImmutable::createFromFormat('Y-m-d H:i:s', '2020-01-01 00:00:00'),
             ),
         ];
     }
